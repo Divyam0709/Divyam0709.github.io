@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="club.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=A, initial-scale=1.0">
+    <title>Result and Discussion</title>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="flex-container">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="method.html">Methodologies</a></li>
+                <li class="active"><a href="result.html">Result and Discussion</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <h1>Result and Discussion</h1>
+        </div>
+        <div>
+            <h2>1. Comparison of Three Models:</h2>
+        </div>
+        <ul class="container">
+            <li> Under epoch=5 and batch size=16, the training accuracy and loss of the three models are shown.</li>
+            <li> It can be observed that there is a significant gap in the performance between the self-designed CNN
+                model and those of the VGG family. </li>
+            <li> While the accuracy of the two VGG models is on the same level, VGG-19 outperforms VGG-16 by a narrow
+                margin. </li>
+            <li> Therefore, after retraining the VGG-19 model under epoch=22 and batch size=16, it is chosen to be
+                integrated into the web application.</li>
+        </ul>
+        <div><img src="../images/result.PNG" alt="TrainingAccuracy" class="zoom"></div>
+        <ul class="container">
+            <li>As the number of convolutional layers increases, the model becomes more capable of extracting
+                higher-level, abstract elements composed of low-level features.</li>
+            <li>Given the complicated, nine-category classification task, where the cancer images are rich in features
+                like shape and color and yet might not be that distinct from one another, the ability to extract and
+                distinguish high-level features is essential for high accuracy.</li>
+            <li>Therefore, a shallow model like the self-designed network yields poor performance, whereas VGG-19 shows
+                high accuracy.</li>
+        </ul>
+        <div>
+            <h2>2. Web Application:</h2>
+        </div>
+        <ul class="container">
+            <li>Upon opening the application, the user will see the homepage shown in Fig.</li>
+            <li>To upload an image for diagnosis, the user clicks the choose file button and uploads their image.</li>
+        </ul>
+        <div><img src="../images/result1.jpg" alt="WebApp" class="zoom"></div>
+        <ul class="container">
+            <li>After a successful upload, the application jumps to another webpage and produces a result based on the
+                proposed model that achieves the best accuracy.</li>
+            <li>To generate a prediction, the trained model is firstly loaded into the Python program using a function
+                called load_model in Keras.</li>
+            <li>Then, after the model produces probabilities for each skin cancer category, the cancer type with the
+                highest probability value is chosen to be the predicted result and will be presented to the user.</li>
+        </ul>
+        <div><img src="../images/result2.jpg" alt="WebAppResult" class="zoom"></div>
+        <ul class="container">
+            <li>In summary, the workflow of the proposed model is shown in Fig</li>
+        </ul>
+        <div><img src="../images/workflow.png" alt="workflow" class="zoom"></div>
+        <div>
+            <h2>3. Conclusion:</h2>
+        </div>
+        <ul class="container">
+            <li>To summarize, performances of three CNN models, namely VGG-16, VGG-19, and a self-designed model, are
+                compared on a multiclass skin cancer classification task.</li>
+            <li>Empirical evidence suggests that VGG-19 has the best performance with a training accuracy of 0.9290 and
+                a training loss of 1.2842. </li>
+            <li>The VGG-19 model is integrated into a web application to assist the diagnosis of skin cancer. </li>
+
+        </ul>
+        <div>
+            <h2>References:</h2>
+        </div>
+        <ul class="container">
+            <li>[1] Basic Information About Skin Cancer. Centers for Disease Control and Prevention.
+                https://www.cdc.gov/cancer/skin/basic_info/index.htm 2021.</li>
+            <li>[2] SKIN CANCER. American Academy of Dermatology Association.
+                https://www.aad.org/media/stats-skin-cancer, 2021.</li>
+            <li>[3] P. Zhu, "Convolutional Neural Networks Based Study and Application for Multicategory Skin Cancer
+                Detection," 2022 3rd International Conference on Electronic Communication and Artificial Intelligence
+                (IWECAI), 2022, pp. 558-561, doi: 10.1109/IWECAI55315.2022.00114. IEEE Xplore</li>
+        </ul>
+    </main>
+</body>
+
+<footer>
+    ©Project 1 Tutorial
+</footer>
+
+</html>

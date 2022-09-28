@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="club.css">
+  <script src="eventData.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodologies</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul class="flex-container">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="introduction.html">Introduction</a></li>
+        <li class="active"><a href="method.html">Methodologies</a></li>
+        <li><a href="result.html">Result and Discussion</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+      </ul>
+    </nav>
+
+  </header>
+  <main>
+    <div>
+      <h1>Methodologies</h1>
+    </div>
+    <div><h2>1. Data Source and Preprocessing</h2></div>
+    <ul class="container">
+      <li>The data used comes from the online platform Kaggle [12]. There are 6,857 images of nine kinds of skin cancer,
+        namely Basal Cell Carcinoma, Actinic Keratosis, Dermatofibroma, Melanoma, Nevus, Seborrheic Keratosis, Squamous
+        Cell Carcinoma, and Vascular Lesion.</li>
+      <li>Each image is of size 600x450px. Some sample images of the nine kinds of skin cancers are attached in Fig</li>
+      <li>The size of the images is changed to 128x128px so that they can be processed by the models with a low number
+        of trainable parameters. </li>
+      <li>Then, the pixel values of the images are divided by 255 for normalization, and the photos are split into a
+        training and testing subset, respectively.</li>
+    </ul>
+    <div>
+      <h2>2. Proposed Approach</h2>
+    </div>
+    <ul class="container">
+      <div><img src="../images/examples.png" alt="ExampleDataset"class="zoom" ></div>
+      <li>CNN models are chosen because of their outstanding performance on image recognition tasks. </li>
+      <li>To determine an ideal CNN network for the classification task, performances of the VGG models (both 16 and 19)
+        built by the Visual Geometry Group at the University of Oxford [13] and a self-designed model are compared.
+      </li>
+      <li>The self-designed model consists of 13 layers, including rescaling, convolutional, pooling, and dense layers.
+      </li>
+      <li>The architecture of the proposed model is shown in Table:</li>
+      <div><img src="../images/architecture.PNG" alt="architecture"class="zoom"></div>
+      <li>To build the model layer by layer, the Sequential function provided by TensorFlow is used.</li>
+      <li>Firstly, as its name suggests, the rescaling layer rescales the RGB channel values of the input images from
+        the range [0, 255] to the range [0,1]. </li>
+      <li>Then, four pairs of Conv2D and AveragePooling layers are used to extract features and reduce the parameters.
+      </li>
+      <li>The number of output filters is chosen to be 16, 32, 64, and 128, respectively, in the four Conv2D layers, and
+        the height and width of the four 2D convolution windows are 3x3.</li>
+      <li>Among the pooling methods, average pooling is chosen since it can retain features of input images better than
+        max pooling.</li>
+      <li>After the four pairs of Conv2D and AveragePooling layers, a dropout layer is added with a dropout probability
+        of 0.3 to reduce the number of parameters and prevent overfitting. </li>
+      <li>Lastly, a flattened layer and two dense layers are applied. The last dense layer has nine neurons, matching
+        the number of skin cancer types.</li>
+    </ul>
+    <div>
+      <h2>3. Implementation Details</h2>
+    </div>
+    <ul class="container">
+      <li>Since the task involves comparing the three models and integrating the model with the highest accuracy into a
+        web application, two sets of parameters are used. </li>
+      <li>On the one hand, smaller batch sizes and epochs can speed up the training process without affecting the rank
+        of the accuracy of the three models. Therefore, batch size=16 and epoch=5 as the first set of parameters is
+        used. </li>
+      <li>On the other hand, after an ideal model is determined, larger batch sizes and epochs are essential for more
+        accurate prediction. </li>
+      <li>Therefore, batch size=40 and epoch=30 are used as the second set of parameters. In both scenarios, Adam as the
+        optimizer and sparse categorical cross-entropy as the loss function is chosen. The default learning rate is
+        0.0001, and the evaluation indicator is accuracy.</li>
+    </ul>
+    <div>
+      <h2>4. Application</h2>
+    </div>
+    <ul class="container">
+      <li>For the application part, the proposed model is deployed as a web application. </li>
+      <div><img src="../images/application.png" alt="Application"class="zoom"></div>
+      <li>The main tool used is Flask, a lightweight web framework written in Python. The HTML component of my
+        application is rather simple, just a message prompting the user to upload the cancer image to be classified and
+        an input form for uploading the image. </li>
+      <li>One point worth noticing is that the image uploaded by the user needs to be processed before it is sent to the
+        model for prediction. </li>
+      <li>Specifically, it needs to be expanded in dimension by adding batch size as one of its dimensions so that it
+        can be accepted by the model.</li>
+    </ul>
+  </main>
+</body>
+<footer>
+  ©Project 1 Tutorial
+</footer>
+
+</html>
